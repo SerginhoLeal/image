@@ -1,0 +1,7 @@
+$ npm install express
+$ npm install mongoose
+$ npm install dotenv
+$ npm install cors
+$ npm install bcryptjs
+$ npm install require-dir
+$ npm install nodemon
