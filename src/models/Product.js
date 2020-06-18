@@ -16,6 +16,10 @@ const UserSchema = new Schema({
     picture:{
         type: String,
         required: true,
+    },
+    pedido:{
+        type: [String],
+        required: true,
     }
 },{
     timestamps:true,
