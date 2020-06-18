@@ -37,7 +37,7 @@ module.exports = {
         if(await Grap.findOne({nome}))//se encontrar um email o cadastro não será realizado
             return res.status(400).send({error:'Nome já em uso!'});
 
-        const user = await Grap.create(req.body);
+        const user = await Grap.create(req.body); 
 
         res.send({
             user,
