@@ -20,7 +20,7 @@ module.exports = {
             if(UsuarioLogado.nome == filterRocket)//para que o usuário não possa dar like duas vezes.
                 return res.status(400).json({error: 'Você Já pediu esse produto'})//retorna o aviso.
 
-            UsuarioReceptor.pedido.push(`${UsuarioLogado.nome}`);//Adicionando o nome do usuario logado no usuário receptor.
+            UsuarioReceptor.pedido.push(UsuarioLogado.nome);//Adicionando o nome do usuario logado no usuário receptor.
 
             await UsuarioReceptor.save();//salva dentro do array.
 
