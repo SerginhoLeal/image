@@ -1,20 +1,25 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken')
-// const authConfig = require('../Config/auth.json');
+const jwt = require('jsonwebtoken')
+const authConfig = require('../config/authConfig.json');
 
 const Grap = mongoose.model('Usuario');
 
-// function generateToken(params = {}){
-//     return jwt.sign(params, authConfig.secret,{
-//         expiresIn: 86400,
-//     });
-// }
+function generateToken(params = {}){
+    return jwt.sign(params, authConfig.secret,{
+        expiresIn: 86400,
+    });
+}
 
 module.exports = {
+    async index(req, res){
+        const Gra = await Grap.find();
+        return res.json(Gra);
+    },
     async login(req, res){
         const {nome, password} = req.body;
 
+    try{
         const user = await Grap.findOne({nome}).select('+password');
         
         if(!user)
@@ -24,11 +29,15 @@ module.exports = {
             return res.status(400).send({error:'Senha invalida'});
         
         user.password = undefined;
-
+    
         res.send({
             user,
-            // token:generateToken({id: user.id}),
+            token:generateToken({id: user.id}),
         });
+    }catch{
+        return res.status(400).send({error:'fail'});
+    }
+
     },
 
     async store(req, res){
@@ -41,7 +50,7 @@ module.exports = {
 
         res.send({
             user,
-            // token:generateToken({id: user.id}),
+            token:generateToken({id: user.id}),
         });
 
         user.password = undefined;
