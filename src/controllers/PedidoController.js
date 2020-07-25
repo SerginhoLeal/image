@@ -23,10 +23,6 @@ module.exports = {
 
         const filterRocket = UsuarioReceptor.pedido.filter(ped => ped.includes(UsuarioLogado.nome));
 
-
-            if(UsuarioLogado.nome == UsuarioReceptor.nome)//para que o criador não possa dar like em si mesmo.
-                return res.status(400).json({error: 'Você não pode se avaliar'})//retorna o aviso.
-
             if(UsuarioLogado.nome == filterRocket)//para que o usuário não possa dar like duas vezes.
                 return res.status(400).json({error: 'Você já pediu esse produto'})//retorna o aviso.
 
