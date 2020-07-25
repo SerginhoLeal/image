@@ -23,7 +23,7 @@ module.exports = {
 
         const filterRocket = UsuarioReceptor.pedido.filter(ped => ped.includes(UsuarioLogado.nome));
 
-        try{
+
             if(UsuarioLogado.nome == UsuarioReceptor.nome)//para que o criador não possa dar like em si mesmo.
                 return res.status(400).json({error: 'Você não pode se avaliar'})//retorna o aviso.
 
@@ -34,10 +34,6 @@ module.exports = {
 
             await UsuarioReceptor.save();//salva dentro do array.
 
-        }catch(err){
-            console.log(err)
-            return res.status(400).send({error:'fail'});
-        }
 
         return res.json(UsuarioReceptor);//retorna para o usuário logado.
     },
