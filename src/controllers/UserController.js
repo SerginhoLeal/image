@@ -16,28 +16,28 @@ module.exports = {
         const Gra = await Grap.find();
         return res.json(Gra);
     },
+
     async login(req, res){
         const {nome, password} = req.body;
 
-    try{
-        const user = await Grap.findOne({nome}).select('+password');
+        try{
+            const user = await Grap.findOne({nome}).select('+password');
+            
+            if(!user)
+                return res.status(400).send({error:'Nome inexistente'});
+            
+            if(!await bcrypt.compare(password, user.password))
+                return res.status(400).send({error:'Senha invalida'});
+            
+            user.password = undefined;
         
-        if(!user)
-            return res.status(400).send({error:'Nome inexistente'});
-        
-        if(!await bcrypt.compare(password, user.password))
-            return res.status(400).send({error:'Senha invalida'});
-        
-        user.password = undefined;
-    
-        res.send({
-            user,
-            token:generateToken({id: user.id}),
-        });
-    }catch{
-        return res.status(400).send({error:'fail'});
-    }
-
+            res.send({
+                user,
+                token:generateToken({id: user.id}),
+            });
+        }catch{
+            return res.status(400).send({error:'fail'});
+        }
     },
 
     async store(req, res){

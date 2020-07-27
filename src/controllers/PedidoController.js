@@ -12,7 +12,7 @@ module.exports = {
             },
         });
 
-        return res.json({sens});
+        return res.json(sens);
     },
     async store(req, res){
         const { user } = req.headers;//pega o usuario logado.
