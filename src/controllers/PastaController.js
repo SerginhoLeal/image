@@ -17,8 +17,6 @@ module.exports = {
     async store(req, res){
         const {nomeProduto, picture} = req.body;
     try{
-        // if(await Product.findOne({nome}))//se encontrar um email o cadastro não será realizado
-        //     return res.status(400).send({error:'Nome já em uso!'});
 
         const user = await Product.create({
             nomeProduto,
