@@ -24,7 +24,7 @@ module.exports = {
         const filterRocket = UsuarioReceptor.pedido.filter(ped => ped.includes(UsuarioLogado.nome));
 
             if(UsuarioLogado.nome == filterRocket)//para que o usuário não possa dar like duas vezes.
-                return res.status(400).json({error: 'Você já pediu esse produto'})//retorna o aviso.
+                return res.status(400).json({error: 'fail'})//retorna o aviso.
 
             UsuarioReceptor.pedido.push(UsuarioLogado.nome);//Adicionando o nome do usuario logado no usuário receptor.
 
